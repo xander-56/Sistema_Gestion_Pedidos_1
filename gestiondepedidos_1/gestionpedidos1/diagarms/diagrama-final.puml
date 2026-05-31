@@ -1,0 +1,61 @@
+@startuml
+
+abstract class Producto {
+    - String nombre
+    - double precio
+    + Producto(String nombre, double precio)
+    + String getNombre()
+    + void setNombre(String nombre)
+    + double getPrecio()
+    + void setPrecio(double precio)
+    + abstract double calcularPrecioFinal()
+    + String toString()
+}
+
+class ProductoFisico {
+    - double costeEnvio
+    + ProductoFisico(String nombre, double precio, double costeEnvio)
+    + double getCosteEnvio()
+    + void setCosteEnvio(double costeEnvio)
+    + double calcularPrecioFinal()
+    + String toString()
+}
+
+class ProductoDigital {
+    - String licencia
+    + ProductoDigital(String nombre, double precio, String licencia)
+    + String getLicencia()
+    + void setLicencia(String licencia)
+    + double calcularPrecioFinal()
+    + String toString()
+}
+
+class Cliente {
+    - String nombre
+    - String email
+    - String direccion
+    + Cliente(String nombre, String email, String direccion)
+    + String getNombre()
+    + void setNombre(String nombre)
+    + String getEmail()
+    + void setEmail(String email)
+    + String getDireccion()
+    + void setDireccion(String direccion)
+    + String toString()
+}
+
+class Pedido {
+    - Cliente cliente
+    - List<Producto> productos
+    + Pedido(Cliente cliente)
+    + void agregarProducto(Producto p)
+    + double calcularTotal()
+    + void mostrarResumen()
+}
+
+Producto <|-- ProductoFisico
+Producto <|-- ProductoDigital
+Pedido o-- Producto
+Pedido --> Cliente
+
+@enduml
