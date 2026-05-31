@@ -1,0 +1,39 @@
+@startuml
+
+abstract class Producto {
+    - String nombre
+    - double precio
+    + Producto(String nombre, double precio)
+    + abstract double calcularPrecioFinal()
+}
+
+class ProductoFisico {
+    - double costeEnvio
+    + double calcularPrecioFinal()
+}
+
+class ProductoDigital {
+    - String licencia
+    + double calcularPrecioFinal()
+}
+
+class Cliente {
+    - String nombre
+    - String email
+    - String direccion
+}
+
+class Pedido {
+    - Cliente cliente
+    - List<Producto> productos
+    + void agregarProducto(Producto p)
+    + double calcularTotal()
+    + void mostrarResumen()
+}
+
+Producto <|-- ProductoFisico
+Producto <|-- ProductoDigital
+Pedido *-- Producto
+Pedido --> Cliente
+
+@enduml
